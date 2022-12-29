@@ -1,0 +1,60 @@
+<div class="contenedor">
+    <div class="barra__superior">
+        <h1>Empleados</h1>
+        <button class="boton__agregar" (click)="modal()" ></button>
+    </div>
+    <table class="tabla" >
+        <tr class="tabla__barra">
+            <th>No</th>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>Fecha de nacimiento</th>
+            <th>Direccion</th>
+            <th>Telefono</th>
+            <th>Puesto</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        <tr *ngFor="let dato of data; index as indice" class="tabla__datos">
+            <td>{{indice + 1}}</td>
+            <td>54521</td>
+            <td>{{dato.nombre}}</td>
+            <td>9/2/1988</td>
+            <td>Juarez 2960</td>
+            <td>11596898</td>
+            <td>Gerente</td>
+            <td>Contratado</td>
+            <td>
+                <button class="boton boton--1" (click)="edicion(dato)" ></button>
+                <button class="boton boton--2"></button>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="contenedor__mobile">
+    <ul>
+        <li>
+            <h1>Empleado</h1>
+            <p>No: 1</p>
+            <p>codigo: 21325</p>
+            <p>Nombre: Jorge Heidenreich</p>
+            <p>Fecha de nacimiento: 9/2/1988</p>
+            <p>Direccion: Juarez 2960</p>
+            <button>Editar</button>
+            <button>Eliminar</button>
+        </li>
+    </ul>
+</div>
+<!--Modal Eliminar-->
+<div class="modal__eliminar" >
+    <div class="contenedor__advertencia">
+        <div class="advertencia">
+            <h1>Eliminar registro</h1>
+            <p>Seguro que quieres eliminar este registro?</p>
+        </div>
+        <div class="advertencia__botones">
+            <button class="boton__1">Aceptar</button>
+            <button class="boton__2">Cancelar</button>
+        </div>
+    </div>
+</div>

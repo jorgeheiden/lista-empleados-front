@@ -1,0 +1,153 @@
+li{
+    list-style: none;
+}
+.contenedor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: rgb(247, 247, 247);
+}
+.barra__superior{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100vw;
+    height: 6rem;
+    background-color: rgb(43, 43, 43);
+    color: white;
+}
+.boton__agregar{
+    position: absolute;
+    z-index: 10;
+    right: 9%;
+    top: 4.2rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    background-image: url("../../../assets/imagenes/iconos/icons8-add-96.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.boton__agregar:active{
+    transform: scale(0.90);
+}
+.barra__superior h1{
+    margin: 0 0 0.6rem 3rem;
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+.tabla{
+    min-width: 80vw;
+    //Elimina espacios en blanco
+    border-collapse: collapse;
+    margin-top: 3rem;
+}
+.tabla__barra{
+    background-color: rgb(230, 230, 230);
+}
+.tabla__barra th{
+    text-align: left;
+    padding: 1rem 0 1rem 1rem;
+    color: rgb(97, 97, 97);
+    font-weight: 400;
+}
+.tabla__datos{
+    border-bottom: 1px solid black;
+}
+.tabla__datos td{
+    padding: 1.1rem 0 1.1rem 1rem;
+}
+.boton{
+    width: 1.4rem;
+    height: 1.5rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-left: 0.9rem;
+    
+}
+.boton:active{
+    transform: scale(0.90);
+}
+.boton--1{
+    background-image: url("../../../assets/imagenes/iconos/edit_pencil_icon_124980.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.boton--2{
+    background-image: url("../../../assets/imagenes/iconos/cancel_cross_delete_remove_icon_131554.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.modal__eliminar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(170, 141, 141, 0.466);
+}
+.contenedor__advertencia{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 36%;
+    background-color: white;
+    padding: 2rem 2rem 2rem 2rem;
+    border-radius: 7px;
+}
+.advertencia{
+    margin-bottom: 1rem;
+}
+.advertencia h1{
+   font-size: 2.1rem;
+   color: rgb(66, 66, 66);
+}
+.advertencia p{
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+    color: rgb(99, 99, 99);
+}
+.advertencia__botones button{
+    width: 9rem;
+    height: 2.5rem;
+    border: none;
+    font-weight: 500;
+    font-size: 1.05rem;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+.advertencia__botones button:active{
+    transform: scale(0.9);
+}
+.boton__1{
+    background-color: rgb(204, 54, 54);
+    margin-right: 1rem;
+}
+.boton__2{
+    margin-left: 1rem;
+    background-color: rgb(59, 187, 48);
+}
+
+.contenedor__mobile{
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .contenedor__mobile{
+        display: flex;
+    }
+}

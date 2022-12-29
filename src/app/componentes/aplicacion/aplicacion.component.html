@@ -1,0 +1,10 @@
+<app-lista-empleados 
+(verModalEvent)="modal($event)" 
+(empladoEdicionEvent)="edicion($event)"
+(modalEdicionEvent)="modalEdicion($event)"
+></app-lista-empleados>
+<app-modal-formulario [verModal]="verModal" ></app-modal-formulario>
+<app-modal-edicion 
+[empleadoParaEdicion]="empleadoParaEdicion"
+[verModalEdicion]="verModalEdicion"
+></app-modal-edicion>
