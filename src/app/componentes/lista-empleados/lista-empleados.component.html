@@ -15,18 +15,18 @@
             <th>Estado</th>
             <th>Acciones</th>
         </tr>
-        <tr *ngFor="let dato of data; index as indice" class="tabla__datos">
+        <tr *ngFor="let empleado of empleados; index as indice" class="tabla__datos">
             <td>{{indice + 1}}</td>
-            <td>54521</td>
-            <td>{{dato.nombre}}</td>
-            <td>9/2/1988</td>
-            <td>Juarez 2960</td>
-            <td>11596898</td>
-            <td>Gerente</td>
-            <td>Contratado</td>
+            <td>{{empleado.codigo}}</td>
+            <td>{{empleado.nombre}} {{empleado.apellido}}</td>
+            <td>{{empleado.fecha_nacimiento}}</td>
+            <td>{{empleado.direccion}}</td>
+            <td>{{empleado.telefono}}</td>
+            <td>{{empleado.puesto}}</td>
+            <td>{{empleado.estado}}</td>
             <td>
-                <button class="boton boton--1" (click)="edicion(dato)" ></button>
-                <button class="boton boton--2"></button>
+                <button class="boton boton--1" (click)="edicion(empleado)" ></button>
+                <button class="boton boton--2" (click)="mostrarModalEliminar(empleado.idempleados)" ></button>
             </td>
         </tr>
     </table>
@@ -46,15 +46,15 @@
     </ul>
 </div>
 <!--Modal Eliminar-->
-<div class="modal__eliminar" >
+<div class="modal__eliminar" *ngIf="verModalEliminar" >
     <div class="contenedor__advertencia">
         <div class="advertencia">
             <h1>Eliminar registro</h1>
             <p>Seguro que quieres eliminar este registro?</p>
         </div>
         <div class="advertencia__botones">
-            <button class="boton__1">Aceptar</button>
-            <button class="boton__2">Cancelar</button>
+            <button class="boton__1" (click)="eliminarRegistro()" >Aceptar</button>
+            <button class="boton__2" (click)="ocultarModalEliminar()" >Cancelar</button>
         </div>
     </div>
 </div>

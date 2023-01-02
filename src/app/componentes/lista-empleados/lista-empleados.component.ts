@@ -9,13 +9,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./lista-empleados.component.scss']
 })
 export class ListaEmpleadosComponent implements OnInit {
-
+  
+  empleados!:Empleado[]
   verModal:boolean = true
   @Output() verModalEvent = new EventEmitter<boolean>()
   empleadoParaEdicion!:Empleado
   @Output() empladoEdicionEvent = new EventEmitter<Empleado>()
   verModalEdicion:boolean = true
   @Output() modalEdicionEvent = new EventEmitter<boolean>()
+  verModalEliminar = false
+  idRegistro!:number
 
   data:any = [
     {
@@ -30,7 +33,7 @@ export class ListaEmpleadosComponent implements OnInit {
     estado: "contratado"
   },
   {
-    idempleados: 1,
+    idempleados: 2,
     codigo: 3333,
     nombre: "Juan",
     apellido: "Lopez",
@@ -44,13 +47,12 @@ export class ListaEmpleadosComponent implements OnInit {
   constructor(private servicio:ServiceService) { }
 
   ngOnInit(): void {
-   //this.obtenerListaDeEmpleados()
+   this.obtenerListaDeEmpleados()
   }
 
   obtenerListaDeEmpleados(){
     this.servicio.getEmplados().subscribe( data =>{
-      console.log(data)
-  
+      this.empleados = data
     })
   }
 
@@ -73,4 +75,23 @@ export class ListaEmpleadosComponent implements OnInit {
       this.verModalEdicion = true
     }
   }
+mostrarModalEliminar(id:number){
+    if(this.verModalEliminar == false){
+      this.verModalEliminar = true
+    } 
+    this.idRegistro = id
+  }
+ ocultarModalEliminar(){
+  if(this.verModalEliminar){
+    this.verModalEliminar = false
+  }
+ }
+ eliminarRegistro(){
+  this.servicio.eliminarEmpleado(this.idRegistro).subscribe( data =>{
+    console.log(data)
+    this.ngOnInit()
+  })
+  this.verModalEliminar = false
+ }
+
 }

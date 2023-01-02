@@ -42,6 +42,7 @@ export class ModalFormularioComponent implements OnInit {
 
   enviarDatos(){
     const empleado: Empleado = {
+    idempleados: 0,
     codigo: this.nuevoEmpleadoForm.value.codigo,
     nombre: this.nuevoEmpleadoForm.value.nombre,
     apellido: this.nuevoEmpleadoForm.value.apellido,
@@ -51,11 +52,11 @@ export class ModalFormularioComponent implements OnInit {
     puesto: this.nuevoEmpleadoForm.value.puesto,
     estado: this.nuevoEmpleadoForm.value.estado
     }
-/*
+
     this.servicio.nuevoEmpleado(empleado).subscribe( data =>{
       console.log(data)
     })
-*/   
+   
     this.nuevoEmpleadoForm.reset()
     this.cerrarModal()
   }
