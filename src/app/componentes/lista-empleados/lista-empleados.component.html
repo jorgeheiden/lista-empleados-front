@@ -19,14 +19,14 @@
             <td>{{indice + 1}}</td>
             <td>{{empleado.codigo}}</td>
             <td>{{empleado.nombre}} {{empleado.apellido}}</td>
-            <td>{{empleado.fecha_nacimiento}}</td>
+            <td>{{empleado.fecha_nacimiento | date: "dd/MM/yy" }}</td>
             <td>{{empleado.direccion}}</td>
             <td>{{empleado.telefono}}</td>
             <td>{{empleado.puesto}}</td>
             <td>{{empleado.estado}}</td>
             <td>
                 <button class="boton boton--1" (click)="edicion(empleado)" ></button>
-                <button class="boton boton--2" (click)="mostrarModalEliminar(empleado.idempleados)" ></button>
+                <button class="boton boton--2" (click)="mostrarModalEliminar(empleado.idempleados!)" ></button>
             </td>
         </tr>
     </table>

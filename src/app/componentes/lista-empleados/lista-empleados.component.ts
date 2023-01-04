@@ -1,4 +1,5 @@
-import { Observable } from 'rxjs';
+import { ActualizarVistaService } from './../../servicios/actualizar-vista.service';
+
 import { ServiceService } from './../../servicios/service.service';
 import { Empleado } from './../../interfaces/empleado';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -6,92 +7,73 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-lista-empleados',
   templateUrl: './lista-empleados.component.html',
-  styleUrls: ['./lista-empleados.component.scss']
+  styleUrls: ['./lista-empleados.component.scss'],
 })
 export class ListaEmpleadosComponent implements OnInit {
-  
-  empleados!:Empleado[]
-  verModal:boolean = true
-  @Output() verModalEvent = new EventEmitter<boolean>()
-  empleadoParaEdicion!:Empleado
-  @Output() empladoEdicionEvent = new EventEmitter<Empleado>()
-  verModalEdicion:boolean = true
-  @Output() modalEdicionEvent = new EventEmitter<boolean>()
-  verModalEliminar = false
-  idRegistro!:number
+  empleados!: Empleado[];
+  verModal: boolean = true;
+  @Output() verModalEvent = new EventEmitter<boolean>();
+  empleadoParaEdicion!: Empleado;
+  @Output() empladoEdicionEvent = new EventEmitter<Empleado>();
+  verModalEdicion: boolean = true;
+  @Output() modalEdicionEvent = new EventEmitter<boolean>();
+  verModalEliminar = false;
+  idRegistro!: number;
 
-  data:any = [
-    {
-    idempleados: 1,
-    codigo: 2222,
-    nombre: "jose",
-    apellido: "perez",
-    fecha_nacimiento: "1988-05-11T00:00:00.000Z",
-    direccion: "juarez 2960",
-    telefono: 11656512,
-    puesto: "gerente",
-    estado: "contratado"
-  },
-  {
-    idempleados: 2,
-    codigo: 3333,
-    nombre: "Juan",
-    apellido: "Lopez",
-    fecha_nacimiento: "1988-05-11T00:00:00.000Z",
-    direccion: "juarez 2960",
-    telefono: 11656512,
-    puesto: "gerente",
-    estado: "contratado"
-  }
-]
-  constructor(private servicio:ServiceService) { }
+  constructor(
+    private servicio: ServiceService,
+    private actualizarVistaService: ActualizarVistaService
+  ) {}
 
   ngOnInit(): void {
-   this.obtenerListaDeEmpleados()
+    this.obtenerListaDeEmpleados();
+
+    this.actualizarVistaService.getVista().subscribe((data) => {
+      this.obtenerListaDeEmpleados();
+    });
   }
 
-  obtenerListaDeEmpleados(){
-    this.servicio.getEmplados().subscribe( data =>{
-      this.empleados = data
-    })
+  obtenerListaDeEmpleados() {
+    this.servicio.getEmplados().subscribe((data) => {
+      this.empleados = data;
+    });
   }
 
-  modal(){
-    this.verModalEvent.emit(this.verModal)
-    if(this.verModal == true){
-      this.verModal = false
-    } else{
-      this.verModal = true
+  modal() {
+    this.verModalEvent.emit(this.verModal);
+    if (this.verModal == true) {
+      this.verModal = false;
+    } else {
+      this.verModal = true;
     }
   }
 
-  edicion(data:Empleado){
-    this.empleadoParaEdicion = data
-    this.empladoEdicionEvent.emit(this.empleadoParaEdicion)
-    this.modalEdicionEvent.emit(this.verModalEdicion)
-    if(this.verModalEdicion == true){
-      this.verModalEdicion = false
-    } else{
-      this.verModalEdicion = true
+  edicion(data: Empleado) {
+    this.empleadoParaEdicion = data;
+    this.empladoEdicionEvent.emit(this.empleadoParaEdicion);
+    this.modalEdicionEvent.emit(this.verModalEdicion);
+    if (this.verModalEdicion == true) {
+      this.verModalEdicion = false;
+    } else {
+      this.verModalEdicion = true;
     }
   }
-mostrarModalEliminar(id:number){
-    if(this.verModalEliminar == false){
-      this.verModalEliminar = true
-    } 
-    this.idRegistro = id
+  mostrarModalEliminar(id: number) {
+    if (this.verModalEliminar == false) {
+      this.verModalEliminar = true;
+    }
+    this.idRegistro = id;
   }
- ocultarModalEliminar(){
-  if(this.verModalEliminar){
-    this.verModalEliminar = false
+  ocultarModalEliminar() {
+    if (this.verModalEliminar) {
+      this.verModalEliminar = false;
+    }
   }
- }
- eliminarRegistro(){
-  this.servicio.eliminarEmpleado(this.idRegistro).subscribe( data =>{
-    console.log(data)
-    this.ngOnInit()
-  })
-  this.verModalEliminar = false
- }
-
+  eliminarRegistro() {
+    this.servicio.eliminarEmpleado(this.idRegistro).subscribe((data) => {
+      console.log(data);
+      this.ngOnInit();
+    });
+    this.verModalEliminar = false;
+  }
 }
