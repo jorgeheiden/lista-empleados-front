@@ -1,4 +1,6 @@
-
+span{
+    color: red;
+}
 .modal{
     display: flex;
     justify-content: center;
@@ -20,7 +22,7 @@
     min-width: 40%;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
-    padding: 1.5rem 0 2.3rem 0;
+    padding: 1.4rem 0 2rem 0;
 }
 .boton__cerrar{
     align-self: flex-end;

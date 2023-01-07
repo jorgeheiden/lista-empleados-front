@@ -71,7 +71,6 @@ export class ListaEmpleadosComponent implements OnInit {
   }
   eliminarRegistro() {
     this.servicio.eliminarEmpleado(this.idRegistro).subscribe((data) => {
-      console.log(data);
       this.ngOnInit();
     });
     this.verModalEliminar = false;

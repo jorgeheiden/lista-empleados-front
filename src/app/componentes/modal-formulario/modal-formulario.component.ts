@@ -2,7 +2,7 @@ import { ActualizarVistaService } from './../../servicios/actualizar-vista.servi
 import { ServiceService } from './../../servicios/service.service';
 import { Empleado } from './../../interfaces/empleado';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-formulario',
@@ -24,41 +24,42 @@ export class ModalFormularioComponent implements OnInit {
     private actualizarVistaService: ActualizarVistaService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   nuevoEmpleadoForm = new FormGroup({
-    nombre: new FormControl(),
-    apellido: new FormControl(),
-    codigo: new FormControl(),
-    fecha: new FormControl(),
-    direccion: new FormControl(),
-    telefono: new FormControl(),
-    puesto: new FormControl(),
-    estado: new FormControl(),
+    nombre: new FormControl("", [Validators.required]),
+    apellido: new FormControl("", [Validators.required]),
+    codigo: new FormControl(null, [Validators.required]),
+    fecha: new FormControl(null, [Validators.required]),
+    direccion: new FormControl("", [Validators.required, Validators.minLength(3)]),
+    telefono: new FormControl(null, [Validators.required]),
+    puesto: new FormControl("", [Validators.required]),
+    estado: new FormControl("", [Validators.required]),
   });
-
+ 
   cerrarModal() {
     this.modal = false;
   }
 
   enviarDatos() {
-    const empleado: Empleado = {
-      codigo: this.nuevoEmpleadoForm.value.codigo,
-      nombre: this.nuevoEmpleadoForm.value.nombre,
-      apellido: this.nuevoEmpleadoForm.value.apellido,
-      fecha_nacimiento: this.nuevoEmpleadoForm.value.fecha,
-      direccion: this.nuevoEmpleadoForm.value.direccion,
-      telefono: this.nuevoEmpleadoForm.value.telefono,
-      puesto: this.nuevoEmpleadoForm.value.puesto,
-      estado: this.nuevoEmpleadoForm.value.estado,
+    const empleado: Empleado =  {
+      codigo: this.nuevoEmpleadoForm.value.codigo!,
+      nombre: this.nuevoEmpleadoForm.value.nombre!,
+      apellido: this.nuevoEmpleadoForm.value.apellido!,
+      fecha_nacimiento: this.nuevoEmpleadoForm.value.fecha!,
+      direccion: this.nuevoEmpleadoForm.value.direccion!,
+      telefono: this.nuevoEmpleadoForm.value.telefono!,
+      puesto: this.nuevoEmpleadoForm.value.puesto!,
+      estado: this.nuevoEmpleadoForm.value.estado!,
     };
-
-    this.servicio.nuevoEmpleado(empleado).subscribe((data) => {
-      console.log(data);
-      this.actualizarVistaService.setVista();
-    });
-
-    this.nuevoEmpleadoForm.reset();
-    this.cerrarModal();
+    if(this.nuevoEmpleadoForm.status == "VALID"){
+      this.servicio.nuevoEmpleado(empleado).subscribe((data) => {
+        this.actualizarVistaService.setVista();
+      });
+      this.nuevoEmpleadoForm.reset();
+      this.cerrarModal();
+    }
   }
+
 }

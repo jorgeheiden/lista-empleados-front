@@ -88,12 +88,12 @@ li{
     background-size: contain;
 }
 .modal__eliminar{
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 100vh;
-    position: absolute;
+    min-height: 100vh;
     top: 0;
     left: 0;
     background-color: rgba(170, 141, 141, 0.466);

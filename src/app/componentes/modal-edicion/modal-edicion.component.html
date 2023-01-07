@@ -4,35 +4,53 @@
         <h1>Editar registro</h1>
         <div class="nombre__apellido">
             <div class="nombre">
-                <label for="nombre">Nombre:</label>
+                <label for="nombre">Nombre: 
+                    <span *ngIf="edicionForm.get('nombre')?.touched && edicionForm.get('nombre')?.errors?.['required']" >Requerido</span>
+                </label>
                 <input type="text" id="nombre" formControlName="nombre" placeholder="Nombre..."> 
             </div>
             <div class="apellido">
-                <label for="apellido">Apellido:</label>
+                <label for="apellido">Apellido: 
+                    <span *ngIf="edicionForm.get('apellido')?.touched && edicionForm.get('apellido')?.errors?.['required']" >Requerido</span>
+                </label>
                 <input type="text" id="apellido" formControlName="apellido" placeholder="Apellido...">
             </div>
         </div>
         <div class="item" >
-            <label for="codigo" >Codigo:</label>
+            <label for="codigo" >Codigo: 
+                <span *ngIf="edicionForm.get('codigo')?.touched && edicionForm.get('codigo')?.errors?.['required']" >Requerido</span>
+            </label>
             <input type="number" id="codigo" formControlName="codigo" placeholder="0000">
         </div>
         <div class="item" >
-            <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+            <label for="fecha_nacimiento">Fecha de nacimiento: 
+                <span *ngIf="edicionForm.get('fecha')?.touched && edicionForm.get('fecha')?.errors?.['required']" >Requerido</span>
+            </label>
             <input type="date" id="fecha_nacimiento" formControlName="fecha">
         </div>
         <div class="item" >
-            <label for="direccion">Direccion:</label>
+            <label for="direccion">Direccion: 
+                <span *ngIf="edicionForm.get('direccion')?.touched && edicionForm.get('direccion')?.errors?.['required']" >Requerido</span> 
+                <span *ngIf="edicionForm.get('direccion')?.touched && edicionForm.get('direccion')?.errors?.['minlength']" >Minimo 3 edicionForm</span>
+            </label>
             <input type="text" id="direccion" formControlName="direccion" placeholder="Direccion...">
         </div>
         <div class="item" >
-            <label for="telefono">Telefono:</label>
+            <label for="telefono">Telefono: 
+                <span *ngIf="edicionForm.get('telefono')?.touched && edicionForm.get('telefono')?.errors?.['required']" >Requerido</span>
+            </label>
             <input type="number" id="telefono" formControlName="telefono" placeholder="1199999">
         </div>
         <div class="item" >
-            <label for="puesto">Puesto:</label>
+            <label for="puesto">Puesto: 
+                <span *ngIf="edicionForm.get('puesto')?.touched && edicionForm.get('puesto')?.errors?.['required']" >Requerido</span>
+            </label>
             <input type="text" id="puesto" formControlName="puesto" placeholder="Puesto...">
         </div>
         <div class="item" >
+            <label for="estado">Estado: 
+                <span *ngIf="edicionForm.get('estado')?.touched && edicionForm.get('estado')?.errors?.['required']" >Requerido</span>
+            </label>
             <select name="estado" id="estado" formControlName="estado">
                 <option value="" selected disabled>Estado</option>
                 <option value="fijo" >Fijo</option>

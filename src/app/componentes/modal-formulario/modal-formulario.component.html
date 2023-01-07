@@ -4,35 +4,49 @@
         <h1>Agregar empleado</h1>
         <div class="nombre__apellido">
             <div class="nombre">
-                <label for="nombre">Nombre:</label>
+                <label for="nombre">Nombre: <span *ngIf="nuevoEmpleadoForm.get('nombre')?.touched && nuevoEmpleadoForm.get('nombre')?.errors?.['required']">Requerido</span></label>
                 <input type="text" id="nombre" formControlName="nombre" placeholder="Nombre..."> 
             </div>
             <div class="apellido">
-                <label for="apellido">Apellido:</label>
-                <input type="text" id="apellido" formControlName="apellido" placeholder="Apellido...">
+                <label for="apellido">Apellido: <span *ngIf="nuevoEmpleadoForm.get('apellido')?.touched && nuevoEmpleadoForm.get('apellido')?.errors?.['required']">Requerido</span></label>
+                <input  type="text" id="apellido" formControlName="apellido" placeholder="Apellido...">
             </div>
         </div>
         <div class="item" >
-            <label for="codigo" >Codigo:</label>
-            <input type="number" id="codigo" formControlName="codigo" placeholder="0000">
+            <label for="codigo" >Codigo:
+                <span *ngIf="nuevoEmpleadoForm.get('codigo')?.touched && nuevoEmpleadoForm.get('codigo')?.errors?.['required']" >Requerido</span>
+            </label>
+            <input  type="number" id="codigo" formControlName="codigo" placeholder="0000">
         </div>
         <div class="item" >
-            <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+            <label for="fecha_nacimiento">Fecha de nacimiento:
+                <span *ngIf="nuevoEmpleadoForm.get('fecha')?.touched && nuevoEmpleadoForm.get('fecha')?.errors?.['required']" >Requerido</span>
+            </label>
             <input type="date" id="fecha_nacimiento" formControlName="fecha">
         </div>
         <div class="item" >
-            <label for="direccion">Direccion:</label>
+            <label for="direccion">Direccion:
+                <span *ngIf="nuevoEmpleadoForm.get('direccion')?.touched && nuevoEmpleadoForm.get('direccion')?.errors?.['required']" >Requerido</span> 
+                <span *ngIf="nuevoEmpleadoForm.get('direccion')?.touched && nuevoEmpleadoForm.get('direccion')?.errors?.['minlength']" >Minimo 3 caracteres</span>
+            </label>
             <input type="text" id="direccion" formControlName="direccion" placeholder="Direccion...">
         </div>
         <div class="item" >
-            <label for="telefono">Telefono:</label>
+            <label for="telefono">Telefono: 
+                <span *ngIf="nuevoEmpleadoForm.get('telefono')?.touched && nuevoEmpleadoForm.get('telefono')?.errors?.['required']" >Requerido</span>
+            </label>
             <input type="number" id="telefono" formControlName="telefono" placeholder="1199999">
         </div>
         <div class="item" >
-            <label for="puesto">Puesto:</label>
+            <label for="puesto">Puesto: 
+                <span *ngIf="nuevoEmpleadoForm.get('puesto')?.touched && nuevoEmpleadoForm.get('puesto')?.errors?.['required']" >Requerido</span>
+            </label>
             <input type="text" id="puesto" formControlName="puesto" placeholder="Puesto...">
         </div>
         <div class="item" >
+            <label for="estado">Estado: 
+                <span *ngIf="nuevoEmpleadoForm.get('estado')?.touched && nuevoEmpleadoForm.get('estado')?.errors?.['required']" >Requerido</span>
+            </label>
             <select name="estado" id="estado" formControlName="estado">
                 <option value="" disabled >Estado</option>
                 <option value="fijo">Fijo</option>
@@ -41,5 +55,6 @@
             </select>
         </div>
             <button type="submit" class="boton__agregar" >Agregar</button>
+            <p *ngIf="nuevoEmpleadoForm.status == 'INVALID' && nuevoEmpleadoForm.touched">Formulario incompleto</p>
     </form>
 </div>

@@ -1,6 +1,6 @@
 import { ActualizarVistaService } from './../../servicios/actualizar-vista.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Empleado } from 'src/app/interfaces/empleado';
 import { ServiceService } from 'src/app/servicios/service.service';
 
@@ -13,13 +13,15 @@ export class ModalEdicionComponent implements OnInit {
   modal: boolean = false;
   empleado!: Empleado;
   id!: number;
+  
   @Input() set empleadoParaEdicion(data: Empleado) {
     if (data) {
+      
       this.edicionForm.setValue({
         nombre: data.nombre,
         apellido: data.apellido,
         codigo: data.codigo,
-        fecha: this.formatearFecha(data.fecha_nacimiento),
+        fecha:  this.formatearFecha(data.fecha_nacimiento),
         direccion: data.direccion,
         telefono: data.telefono,
         puesto: data.puesto,
@@ -34,6 +36,7 @@ export class ModalEdicionComponent implements OnInit {
     } else {
       this.modal = true;
     }
+
   }
 
   constructor(
@@ -44,14 +47,14 @@ export class ModalEdicionComponent implements OnInit {
   ngOnInit(): void {}
 
   edicionForm = new FormGroup({
-    nombre: new FormControl(),
-    apellido: new FormControl(),
-    codigo: new FormControl(),
-    fecha: new FormControl(),
-    direccion: new FormControl(),
-    telefono: new FormControl(),
-    puesto: new FormControl(),
-    estado: new FormControl(),
+    nombre: new FormControl("", [Validators.required]),
+    apellido: new FormControl("", [Validators.required]),
+    codigo: new FormControl(0, [Validators.required]),
+    fecha: new FormControl("", [Validators.required]),
+    direccion: new FormControl("", [Validators.required, Validators.minLength(3)]),
+    telefono: new FormControl(0, [Validators.required]),
+    puesto: new FormControl("", [Validators.required]),
+    estado: new FormControl("", [Validators.required]),
   });
 
   ocultarModal() {
@@ -60,14 +63,14 @@ export class ModalEdicionComponent implements OnInit {
   enviarDatos() {
     this.empleado = {
       idempleados: this.id,
-      codigo: this.edicionForm.value.codigo,
-      nombre: this.edicionForm.value.nombre,
-      apellido: this.edicionForm.value.apellido,
-      fecha_nacimiento: this.edicionForm.value.fecha,
-      direccion: this.edicionForm.value.direccion,
-      telefono: this.edicionForm.value.telefono,
-      puesto: this.edicionForm.value.puesto,
-      estado: this.edicionForm.value.estado,
+      codigo: this.edicionForm.value.codigo!,
+      nombre: this.edicionForm.value.nombre!,
+      apellido: this.edicionForm.value.apellido!,
+      fecha_nacimiento: this.edicionForm.value.fecha!,
+      direccion: this.edicionForm.value.direccion!,
+      telefono: this.edicionForm.value.telefono!,
+      puesto: this.edicionForm.value.puesto!,
+      estado: this.edicionForm.value.estado!,
     };
     this.servicio.editarEmpleado(this.empleado).subscribe((data) => {
       console.log(data);
@@ -82,16 +85,19 @@ export class ModalEdicionComponent implements OnInit {
     let año = fecha.getFullYear();
     let mes;
     let dia;
-    if (fecha.getDay() < 10) {
-      dia = '0' + fecha.getDay();
+    if (fecha.getDate() < 10) {
+      dia = '0' + (fecha.getDate() );
     } else {
-      dia = fecha.getDay();
+      dia = (fecha.getDate() );
     }
     if (fecha.getMonth() < 10) {
-      mes = '0' + fecha.getMonth();
+      mes = '0' + (fecha.getMonth() + 1);
     } else {
-      mes = fecha.getMonth();
+      mes = (fecha.getMonth() + 1);
     }
+    console.log(data)
+    console.log(fecha)
+    console.log(fecha.getDate())
     return año + '-' + mes + '-' + dia;
   }
 }

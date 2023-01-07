@@ -3,7 +3,7 @@ export interface Empleado {
     codigo:           number;
     nombre:           string;
     apellido:         string;
-    fecha_nacimiento: Date 
+    fecha_nacimiento: Date | string
     direccion:        string;
     telefono:         number;
     puesto:           string;
