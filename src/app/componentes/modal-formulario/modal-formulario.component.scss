@@ -100,3 +100,15 @@ button:hover{
 button:active{
     transform: scale(0.95);
 }
+
+@media only screen and (max-width: 600px){
+    .nombre__apellido{
+        width: 85%;
+    }
+    .item{
+        width: 85%;
+    }
+    .boton__agregar{
+        width: 85%;
+    }
+}
